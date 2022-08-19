@@ -244,7 +244,7 @@ class _CartPageState extends State<CartPage> {
               width: double.infinity,
               child: TextFormField(
                 controller: _voucher,
-                style: secondaryTextStyle,
+                style: secondaryTextStyle.copyWith(fontSize: 13),
                 decoration: InputDecoration(
                   hintStyle: secondaryTextStyle.copyWith(fontSize: 13),
                   hintText: 'puas',
