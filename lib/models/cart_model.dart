@@ -1,14 +1,14 @@
 import 'package:flutter_interview_test/models/menu_model.dart';
 
 class CartModel {
-  int id;
-  MenuModel menu;
-  int quantity;
+  int? id;
+  MenuModel? menu;
+  int? quantity;
 
   CartModel({
-    required this.id,
-    required this.menu,
-    required this.quantity,
+    this.id,
+    this.menu,
+    this.quantity,
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
@@ -22,12 +22,12 @@ class CartModel {
   Map<String, dynamic> toJson() {
     return {
       'id': id,
-      'menu': menu.toJson(),
+      'menu': menu!.toJson(),
       'quantity': quantity,
     };
   }
 
   int getTotalPrice() {
-    return menu.harga * quantity;
+    return int.parse(menu!.harga.toString()) * quantity! ;
   }
 }

@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/models/cart_model.dart';
+import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/menu_provider.dart';
@@ -26,12 +28,14 @@ class _CartPageState extends State<CartPage> {
   }
 
   getInit() async {
-    await Provider.of<MenuProvider>(context, listen: false).getMenus();
+    // await Provider.of<MenuProvider>(context, listen: false).getMenus();
+    await Provider.of<CartProvider>(context, listen: false).addCart();
   }
 
   @override
   Widget build(BuildContext context) {
-    MenuProvider menuProvider = Provider.of<MenuProvider>(context);
+    // MenuProvider menuProvider = Provider.of<MenuProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
 
     Widget checkoutButton() {
       return Container(
@@ -317,7 +321,7 @@ class _CartPageState extends State<CartPage> {
           Padding(
             padding: const EdgeInsets.only(top: 31),
             child: Column(
-              children: menuProvider.menus
+              children: cartProvider.menus
                   .map(
                     (menu) => MenuTile(
                       menu: menu,

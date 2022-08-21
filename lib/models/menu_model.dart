@@ -2,18 +2,18 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class MenuModel {
-  int id;
-  String nama;
-  int harga;
-  String tipe;
-  String gambar;
+  late int? id;
+  late String? nama;
+  late int? harga;
+  late String? tipe;
+  late String? gambar;
   
   MenuModel({
-    required this.id,
-    required this.nama,
-    required this.harga,
-    required this.tipe,
-    required this.gambar,
+    this.id,
+    this.nama,
+    this.harga,
+    this.tipe,
+    this.gambar,
   });
 
   Map<String, dynamic> toMap() {

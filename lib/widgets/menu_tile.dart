@@ -1,15 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/models/cart_model.dart';
 import 'package:flutter_interview_test/models/menu_model.dart';
-
 import '../theme.dart';
 
-class MenuTile extends StatelessWidget {
-  MenuModel? menu;
+class MenuTile extends StatefulWidget {
+  late MenuModel? menu;
 
   MenuTile({this.menu, Key? key}) : super(key: key);
 
+  @override
+  State<MenuTile> createState() => _MenuTileState();
+}
+
+class _MenuTileState extends State<MenuTile> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -22,11 +27,13 @@ class MenuTile extends StatelessWidget {
         bottom: 10,
       ),
       decoration: BoxDecoration(
-          color: bgColor2, borderRadius: BorderRadius.circular(8)),
+        color: bgColor2,
+        borderRadius: BorderRadius.circular(8),
+      ),
       child: Row(
         children: [
           Image.network(
-            menu!.gambar,
+            widget.menu!.gambar.toString(),
             width: 75,
             height: 75,
           ),
@@ -41,7 +48,7 @@ class MenuTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    menu!.nama,
+                    widget.menu!.nama.toString(),
                     style: primaryTextStyle.copyWith(
                       fontSize: 23,
                       fontWeight: medium,
@@ -52,7 +59,7 @@ class MenuTile extends StatelessWidget {
                     height: 7,
                   ),
                   Text(
-                    'Rp ${menu!.harga}',
+                    'Rp ${widget.menu!.harga}',
                     style: priceTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: bold,
