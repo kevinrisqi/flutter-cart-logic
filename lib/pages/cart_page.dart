@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/menu_provider.dart';
 import '../theme.dart';
-import '../widgets/product_tile.dart';
+import '../widgets/menu_tile.dart';
 
 class CartPage extends StatefulWidget {
   CartPage({Key? key}) : super(key: key);
@@ -18,7 +20,19 @@ class _CartPageState extends State<CartPage> {
   bool isInputVoucher = false;
 
   @override
+  void initState() {
+    getInit();
+    super.initState();
+  }
+
+  getInit() async {
+    await Provider.of<MenuProvider>(context, listen: false).getMenus();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    MenuProvider menuProvider = Provider.of<MenuProvider>(context);
+
     Widget checkoutButton() {
       return Container(
         decoration: BoxDecoration(
@@ -303,32 +317,13 @@ class _CartPageState extends State<CartPage> {
           Padding(
             padding: const EdgeInsets.only(top: 31),
             child: Column(
-              children: [
-                ProductTile(
-                  image: 'assets/image_food_1.png',
-                  name: 'Chicken Katsu',
-                  price: 11000,
-                  note: 'Pedas dikit, tanpa sayur',
-                ),
-                ProductTile(
-                  image: 'assets/image_food_2.png',
-                  name: 'Chicken Slam',
-                  price: 9000,
-                  note: 'Tambahkan catatan',
-                ),
-                ProductTile(
-                  image: 'assets/image_drink_1.png',
-                  name: 'Blue Blood',
-                  price: 8000,
-                  note: 'Es-nya dikit',
-                ),
-                ProductTile(
-                  image: 'assets/image_drink_2.png',
-                  name: 'Dark Chocolate',
-                  price: 12000,
-                  note: 'Tambahkan catatan',
-                ),
-              ],
+              children: menuProvider.menus
+                  .map(
+                    (menu) => MenuTile(
+                      menu: menu,
+                    ),
+                  )
+                  .toList(),
             ),
           )
         ],
