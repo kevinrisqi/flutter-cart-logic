@@ -26,4 +26,8 @@ class CartModel {
       'quantity': quantity,
     };
   }
+
+  int getTotalPrice() {
+    return menu.harga * quantity;
+  }
 }
