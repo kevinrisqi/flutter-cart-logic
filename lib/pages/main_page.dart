@@ -86,19 +86,21 @@ class _MainPageState extends State<MainPage> {
       }
     }
 
-    return Scaffold(
-      body: body(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: primaryColor,
-        child: Image.asset(
-          'assets/icon_cart.png',
-          color: Colors.white,
-          width: 20,
+    return SafeArea(
+      child: Scaffold(
+        body: body(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: primaryColor,
+          child: Image.asset(
+            'assets/icon_cart.png',
+            color: Colors.white,
+            width: 20,
+          ),
         ),
+        bottomNavigationBar: customNavBar(),
       ),
-      bottomNavigationBar: customNavBar(),
     );
   }
 }

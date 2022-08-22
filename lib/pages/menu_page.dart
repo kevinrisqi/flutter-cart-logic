@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/models/menu_model.dart';
 import 'package:flutter_interview_test/theme.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  MenuModel? menu;
+  MenuPage({this.menu, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +23,10 @@ class MenuPage extends StatelessWidget {
                     height: 300,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(
-                          'assets/image_food_1.png',
+                        image: NetworkImage(
+                          menu!.gambar.toString(),
                         ),
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fitHeight,
                       ),
                     ),
                   ),
@@ -38,10 +40,11 @@ class MenuPage extends StatelessWidget {
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(Icons.chevron_left)),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(Icons.chevron_left),
+                        ),
                         Icon(Icons.shopping_bag),
                       ],
                     ),
@@ -64,7 +67,7 @@ class MenuPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ayam Crispy',
+                    menu!.nama.toString(),
                     style: primaryTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: bold,
@@ -75,9 +78,9 @@ class MenuPage extends StatelessWidget {
                     height: 4,
                   ),
                   Text(
-                    'Makanan',
+                    menu!.tipe.toString(),
                     style: secondaryTextStyle.copyWith(
-                      color: Colors.white10,
+                      color: Colors.white60,
                     ),
                   ),
                   SizedBox(
@@ -100,7 +103,7 @@ class MenuPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Rp 13000',
+                          'Rp ${menu!.harga}',
                           style: priceTextStyle.copyWith(
                             fontWeight: bold,
                           ),
@@ -149,7 +152,7 @@ class MenuPage extends StatelessWidget {
                           vertical: 11,
                         ),
                         child: Text(
-                          'Pesan Sekarang',
+                          'Tambah ke Keranjang',
                           style: actionTextStyle.copyWith(
                             fontSize: 16,
                             fontWeight: semiBold,

@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/': (context) => MainPage(),
           '/cart': (context) => CartPage(),
-          '/menu': (context) => MenuPage()
+          '/menu': (context) => MenuPage(),
         },
       ),
     );

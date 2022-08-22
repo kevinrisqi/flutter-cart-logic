@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/menu_model.dart';
+import 'package:flutter_interview_test/pages/menu_page.dart';
 
 import '../theme.dart';
 
@@ -13,7 +14,14 @@ class MenuCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/menu');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MenuPage(
+              menu: menu,
+            ),
+          ),
+        );
       },
       child: Container(
         padding: EdgeInsets.all(8),
