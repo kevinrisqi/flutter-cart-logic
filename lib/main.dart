@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/pages/main_page.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: CartPage(),
+        home: MainPage(),
       ),
     );
   }

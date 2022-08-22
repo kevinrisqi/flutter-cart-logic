@@ -7,6 +7,7 @@ Color bgColor3 = Color(0xffF6F6F6);
 Color primaryColor = Color(0xff009AAD);
 Color secondaryColor = Color(0xff2E2E2E);
 Color whiteColor = Color(0xffffffff);
+Color blueColor = const Color(0xff252836);
 
 TextStyle primaryTextStyle = GoogleFonts.montserrat(color: secondaryColor);
 TextStyle secondaryTextStyle = GoogleFonts.montserrat(

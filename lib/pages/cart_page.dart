@@ -21,16 +21,7 @@ class _CartPageState extends State<CartPage> {
 
   bool isInputVoucher = false;
 
-  @override
-  void initState() {
-    getInit();
-    super.initState();
-  }
-
-  getInit() async {
-    // await Provider.of<MenuProvider>(context, listen: false).getMenus();
-    await Provider.of<CartProvider>(context, listen: false).addCart();
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
