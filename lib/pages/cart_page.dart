@@ -23,8 +23,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    // MenuProvider menuProvider = Provider.of<MenuProvider>(context);
-    CartProvider cartProvider = Provider.of<CartProvider>(context);
+    MenuProvider menuProvider = Provider.of<MenuProvider>(context);
 
     Widget checkoutButton() {
       return Container(
@@ -310,7 +309,7 @@ class _CartPageState extends State<CartPage> {
           Padding(
             padding: const EdgeInsets.only(top: 31),
             child: Column(
-              children: cartProvider.menus
+              children: menuProvider.menus
                   .map(
                     (menu) => MenuTile(
                       menu: menu,
