@@ -21,8 +21,6 @@ class _CartPageState extends State<CartPage> {
 
   bool isInputVoucher = false;
 
- 
-
   @override
   Widget build(BuildContext context) {
     // MenuProvider menuProvider = Provider.of<MenuProvider>(context);

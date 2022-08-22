@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/pages/main_page.dart';
-import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
 import 'package:provider/provider.dart';
+
 import 'pages/cart_page.dart';
 
 void main() {
@@ -25,12 +25,16 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => CartProvider(),
+          create: (context) => MenuProvider(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MainPage(),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => MainPage(),
+          '/cart': (context) => CartPage(),
+        },
       ),
     );
   }

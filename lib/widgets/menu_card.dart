@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/models/menu_model.dart';
 
 import '../theme.dart';
 
 class MenuCard extends StatelessWidget {
-  const MenuCard({Key? key}) : super(key: key);
+  MenuModel menu;
+  MenuCard({required this.menu, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,10 @@ class MenuCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/image_food_1.png',
+            child: Image.network(
+              menu.gambar.toString(),
               width: 75,
+              height: 75,
             ),
           ),
           SizedBox(
@@ -37,7 +40,7 @@ class MenuCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Ayam Crispy',
+                menu.nama.toString(),
                 style: primaryTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: semiBold,
@@ -47,7 +50,7 @@ class MenuCard extends StatelessWidget {
                 height: 4,
               ),
               Text(
-                'Rp 12000',
+                'Rp ${menu.harga}',
                 style: priceTextStyle.copyWith(
                   fontWeight: bold,
                 ),
