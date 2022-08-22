@@ -5,59 +5,57 @@ import 'package:flutter_interview_test/services/menu_service.dart';
 import '../models/cart_model.dart';
 
 class CartProvider with ChangeNotifier {
-  List<MenuModel> _menus = [];
   List<CartModel> _carts = [];
 
   List<CartModel> get carts {
     return _carts;
   }
 
-  List<MenuModel> get menus => _menus;
-
-  set menus(List<MenuModel> menu) {
-    _menus = menu;
-    notifyListeners();
-  }
-
-  Future<void> getMenus() async {
-    try {
-      List<MenuModel> menus = await MenuService().getMenu();
-      _menus = menus;
-      addCart();
-    } catch (e) {
-      print(e);
+  menuExist(MenuModel menu) {
+    if (_carts.indexWhere((element) => element.menu!.id == menu.id) == -1) {
+      return false;
+    } else {
+      return true;
     }
   }
 
-  set carts(List<CartModel> carts) {
-    _carts = carts;
+  addCart(MenuModel menu) {
+    if (menuExist(menu)) {
+      int index = _carts.indexWhere((element) => element.menu!.id == menu.id);
+      _carts[index].quantity = _carts[index].quantity! + 1;
+    } else {
+      _carts.add(CartModel(
+        id: carts.length,
+        menu: menu,
+        quantity: 1,
+      ));
+    }
     notifyListeners();
   }
 
-  Future<void> addCart() async {
-    try {
-      List<MenuModel> menus = await MenuService().getMenu();
-      List<MenuModel> menu = [];
-      _menus = menus;
+  addQuantity(int id) {
+    _carts[id].quantity = _carts[id].quantity! + 1;
+    notifyListeners();
+  }
 
-      menus.map((e) => null).toList();
-      _carts.add(
-        CartModel(
-          id: _carts.length,
-          // menu: MenuModel(
-          //   gambar: 'https://tes-mobile.landa.id/img/chicken-katsu.png',
-          //   nama: 'tak tau',
-          //   harga: 3000,
-          //   id: 3,
-          //   tipe: 'lala',
-          // ),
-          // menu: menu.,
-          quantity: 1,
-        ),
-      );
-      notifyListeners();
-    } catch (e) {
-      print(e);
+  minQuantity(int id) {
+    _carts[id].quantity = _carts[id].quantity! - 1;
+    notifyListeners();
+  }
+
+  totalItems() {
+    int total = 0;
+    for (var item in _carts) {
+      total += item.quantity!;
     }
+    return total;
+  }
+
+  totalPrice() {
+    int total = 0;
+    for (var item in _carts) {
+      total += (item.quantity! * item.menu!.harga!);
+    }
+    return total;
   }
 }

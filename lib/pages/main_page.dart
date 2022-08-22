@@ -91,7 +91,9 @@ class _MainPageState extends State<MainPage> {
         body: body(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/cart');
+          },
           backgroundColor: primaryColor,
           child: Image.asset(
             'assets/icon_cart.png',

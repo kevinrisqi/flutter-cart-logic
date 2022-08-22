@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/pages/main_page.dart';
+import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -20,13 +21,15 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (context) => MenuProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         ),
       ],
       child: MaterialApp(

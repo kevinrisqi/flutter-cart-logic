@@ -3,20 +3,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/cart_model.dart';
 import 'package:flutter_interview_test/models/menu_model.dart';
+import 'package:flutter_interview_test/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 import '../theme.dart';
 
-class MenuTile extends StatefulWidget {
-  late MenuModel? menu;
-
-  MenuTile({this.menu, Key? key}) : super(key: key);
+class CartCard extends StatefulWidget {
+  CartModel? cart;
+  CartCard({this.cart, Key? key}) : super(key: key);
 
   @override
-  State<MenuTile> createState() => _MenuTileState();
+  State<CartCard> createState() => _CartCardState();
 }
 
-class _MenuTileState extends State<MenuTile> {
+class _CartCardState extends State<CartCard> {
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Container(
       width: 378,
       margin: EdgeInsets.only(bottom: 18, right: 25, left: 25),
@@ -33,7 +36,7 @@ class _MenuTileState extends State<MenuTile> {
       child: Row(
         children: [
           Image.network(
-            widget.menu!.gambar.toString(),
+            widget.cart!.menu!.gambar.toString(),
             width: 75,
             height: 75,
           ),
@@ -48,7 +51,7 @@ class _MenuTileState extends State<MenuTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.menu!.nama.toString(),
+                    widget.cart!.menu!.nama.toString(),
                     style: primaryTextStyle.copyWith(
                       fontSize: 23,
                       fontWeight: medium,
@@ -59,7 +62,7 @@ class _MenuTileState extends State<MenuTile> {
                     height: 7,
                   ),
                   Text(
-                    'Rp ${widget.menu!.harga}',
+                    'Rp ${widget.cart!.menu!.harga}',
                     style: priceTextStyle.copyWith(
                       fontSize: 18,
                       fontWeight: bold,
@@ -95,23 +98,33 @@ class _MenuTileState extends State<MenuTile> {
           ),
           Row(
             children: [
-              Image.asset(
-                'assets/button_add.png',
-                width: 20,
+              GestureDetector(
+                onTap: () {
+                  cartProvider.addQuantity(widget.cart!.id!);
+                },
+                child: Image.asset(
+                  'assets/button_add.png',
+                  width: 20,
+                ),
               ),
               SizedBox(
                 width: 11,
               ),
               Text(
-                '1',
+                widget.cart!.quantity.toString(),
                 style: primaryTextStyle,
               ),
               SizedBox(
                 width: 11,
               ),
-              Image.asset(
-                'assets/button_min.png',
-                width: 20,
+              GestureDetector(
+                onTap: (){
+                  cartProvider.minQuantity(widget.cart!.id!);
+                },
+                child: Image.asset(
+                  'assets/button_min.png',
+                  width: 20,
+                ),
               ),
             ],
           )

@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/menu_model.dart';
+import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/theme.dart';
+import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
   MenuModel? menu;
@@ -10,6 +12,8 @@ class MenuPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       backgroundColor: bgColor1,
       body: Column(
@@ -139,7 +143,10 @@ class MenuPage extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        cartProvider.addCart(menu!);
+                        Navigator.pushNamed(context, '/cart');
+                      },
                       style: ElevatedButton.styleFrom(
                         primary: primaryColor,
                         shape: RoundedRectangleBorder(

@@ -7,7 +7,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/menu_provider.dart';
 import '../theme.dart';
-import '../widgets/menu_tile.dart';
+import '../widgets/cart_card.dart';
 
 class CartPage extends StatefulWidget {
   CartPage({Key? key}) : super(key: key);
@@ -24,6 +24,8 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     MenuProvider menuProvider = Provider.of<MenuProvider>(context);
+    CartProvider cartProvider = Provider.of<CartProvider>(context);
+    print(cartProvider.carts.length);
 
     Widget checkoutButton() {
       return Container(
@@ -57,7 +59,7 @@ class _CartPageState extends State<CartPage> {
                         width: 4,
                       ),
                       Text(
-                        '(3 Menu) :',
+                        '(${cartProvider.totalItems().toString()} Menu) :',
                         style: primaryTextStyle.copyWith(
                           fontSize: 18,
                           fontWeight: medium,
@@ -66,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   Text(
-                    'Rp 28.000',
+                    cartProvider.totalPrice().toString(),
                     style: priceTextStyle.copyWith(
                       fontWeight: bold,
                     ),
@@ -166,7 +168,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                         Text(
-                          'Rp 28.000',
+                          cartProvider.totalPrice().toString(),
                           style: priceTextStyle.copyWith(
                             fontSize: 20,
                             fontWeight: bold,
@@ -309,12 +311,8 @@ class _CartPageState extends State<CartPage> {
           Padding(
             padding: const EdgeInsets.only(top: 31),
             child: Column(
-              children: menuProvider.menus
-                  .map(
-                    (menu) => MenuTile(
-                      menu: menu,
-                    ),
-                  )
+              children: cartProvider.carts
+                  .map((cart) => CartCard(cart: cart))
                   .toList(),
             ),
           )
