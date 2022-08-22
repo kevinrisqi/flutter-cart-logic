@@ -11,53 +11,58 @@ class MenuCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      margin: EdgeInsets.only(
-        bottom: 20,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
-        color: bgColor2,
-        border: Border.all(
-          color: blueColor.withOpacity(0.3),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/menu');
+      },
+      child: Container(
+        padding: EdgeInsets.all(8),
+        margin: EdgeInsets.only(
+          bottom: 20,
         ),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.network(
-              menu.gambar.toString(),
-              width: 75,
-              height: 75,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: bgColor2,
+          border: Border.all(
+            color: blueColor.withOpacity(0.3),
+          ),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.network(
+                menu.gambar.toString(),
+                width: 75,
+                height: 75,
+              ),
             ),
-          ),
-          SizedBox(
-            width: 12,
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                menu.nama.toString(),
-                style: primaryTextStyle.copyWith(
-                  fontSize: 16,
-                  fontWeight: semiBold,
+            SizedBox(
+              width: 12,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  menu.nama.toString(),
+                  style: primaryTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: semiBold,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 4,
-              ),
-              Text(
-                'Rp ${menu.harga}',
-                style: priceTextStyle.copyWith(
-                  fontWeight: bold,
+                SizedBox(
+                  height: 4,
                 ),
-              ),
-            ],
-          )
-        ],
+                Text(
+                  'Rp ${menu.harga}',
+                  style: priceTextStyle.copyWith(
+                    fontWeight: bold,
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

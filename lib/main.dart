@@ -6,6 +6,7 @@ import 'package:flutter_interview_test/providers/menu_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart_page.dart';
+import 'pages/menu_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +35,7 @@ class _MyAppState extends State<MyApp> {
         routes: {
           '/': (context) => MainPage(),
           '/cart': (context) => CartPage(),
+          '/menu': (context) => MenuPage()
         },
       ),
     );
