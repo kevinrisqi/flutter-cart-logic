@@ -51,7 +51,7 @@ class CartProvider with ChangeNotifier {
           //   id: 3,
           //   tipe: 'lala',
           // ),
-          menu: menu.,
+          // menu: menu.,
           quantity: 1,
         ),
       );
