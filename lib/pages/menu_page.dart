@@ -62,7 +62,103 @@ class MenuPage extends StatelessWidget {
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [],
+                children: [
+                  Text(
+                    'Ayam Crispy',
+                    style: primaryTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    'Makanan',
+                    style: secondaryTextStyle.copyWith(
+                      color: Colors.white10,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.05),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Price',
+                          style: priceTextStyle.copyWith(
+                            fontWeight: bold,
+                          ),
+                        ),
+                        Text(
+                          'Rp 13000',
+                          style: priceTextStyle.copyWith(
+                            fontWeight: bold,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Text(
+                    'Deskripsi',
+                    style: secondaryTextStyle.copyWith(
+                      fontWeight: semiBold,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    'Salah satu makanan favorit di Indonesia dengan ciri khas rasa pedas yang nikmat. Sehingga cocok untuk dinikmati ketika cuaca dingin atau turun hujan',
+                    style: secondaryTextStyle.copyWith(
+                      fontWeight: light,
+                      color: Colors.grey,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Spacer(),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: primaryColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 11,
+                        ),
+                        child: Text(
+                          'Pesan Sekarang',
+                          style: actionTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
