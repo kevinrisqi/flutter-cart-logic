@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   Text(
-                    cartProvider.totalPrice().toString(),
+                    'Rp ${cartProvider.totalPrice().toString()}',
                     style: priceTextStyle.copyWith(
                       fontWeight: bold,
                     ),
@@ -119,7 +119,7 @@ class _CartPageState extends State<CartPage> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    voucherProvider.voucherActive.length
+                                    voucherProvider.voucherActive[0].kode
                                         .toString(),
                                     style: secondaryTextStyle.copyWith(
                                       fontWeight: light,
@@ -189,7 +189,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                         Text(
-                          cartProvider.totalPrice().toString(),
+                          'Rp ${cartProvider.totalPrice()}',
                           style: priceTextStyle.copyWith(
                             fontSize: 20,
                             fontWeight: bold,
@@ -313,6 +313,11 @@ class _CartPageState extends State<CartPage> {
                       -1) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
+                        ),
                         backgroundColor: alertColor,
                         content: Text(
                           'Maaf, kode voucher yg Anda masukkan salah!',
@@ -329,6 +334,22 @@ class _CartPageState extends State<CartPage> {
                     print('Kode ${voucher[index].kode}');
                     voucherProvider.setVoucher(voucher[index]!);
                     isInputVoucher = false;
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
+                        ),
+                        backgroundColor: primaryColor,
+                        content: Text(
+                          'Voucher berhasil digunakan!',
+                          style: secondaryTextStyle.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(

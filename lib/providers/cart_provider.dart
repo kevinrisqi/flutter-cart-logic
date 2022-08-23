@@ -40,6 +40,9 @@ class CartProvider with ChangeNotifier {
 
   minQuantity(int id) {
     _carts[id].quantity = _carts[id].quantity! - 1;
+    if (_carts[id].quantity! < 0 ) {
+      return _carts[id].quantity = 0;
+    }
     notifyListeners();
   }
 
