@@ -50,10 +50,11 @@ class MenuPage extends StatelessWidget {
                           child: Icon(Icons.chevron_left),
                         ),
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(context, '/cart');
-                            },
-                            child: Icon(Icons.shopping_bag)),
+                          onTap: () {
+                            Navigator.pushNamed(context, '/cart');
+                          },
+                          child: Icon(Icons.shopping_bag),
+                        ),
                       ],
                     ),
                   ),

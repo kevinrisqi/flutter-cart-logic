@@ -16,7 +16,7 @@ class MenuProvider extends ChangeNotifier {
   Future<void> getMenus() async {
     try {
       List<MenuModel> menus = await MenuService().getMenu();
-      _menus = menus;
+    _menus = menus;
     } catch (e) {
       print(e);
     }
