@@ -49,7 +49,11 @@ class MenuPage extends StatelessWidget {
                           },
                           child: Icon(Icons.chevron_left),
                         ),
-                        Icon(Icons.shopping_bag),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, '/cart');
+                            },
+                            child: Icon(Icons.shopping_bag)),
                       ],
                     ),
                   ),

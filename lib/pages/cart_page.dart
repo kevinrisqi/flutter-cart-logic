@@ -23,9 +23,7 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    MenuProvider menuProvider = Provider.of<MenuProvider>(context);
     CartProvider cartProvider = Provider.of<CartProvider>(context);
-    print(cartProvider.carts.length);
 
     Widget checkoutButton() {
       return Container(
@@ -306,6 +304,17 @@ class _CartPageState extends State<CartPage> {
 
     return Scaffold(
       backgroundColor: bgColor1,
+      appBar: AppBar(
+        title: Text(
+          'Keranjang',
+          style: primaryTextStyle.copyWith(
+            fontSize: 16,
+            fontWeight: semiBold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: blueColor,
+      ),
       body: ListView(
         children: [
           Padding(
