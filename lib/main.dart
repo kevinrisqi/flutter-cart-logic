@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/pages/main_page.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
+import 'package:flutter_interview_test/providers/voucher_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'pages/cart_page.dart';
@@ -30,6 +31,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (context) => CartProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => VoucherProvider(),
         ),
       ],
       child: MaterialApp(

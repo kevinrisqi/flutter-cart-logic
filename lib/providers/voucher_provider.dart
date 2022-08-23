@@ -4,6 +4,9 @@ import 'package:flutter_interview_test/services/voucher_service.dart';
 
 class VoucherProvider with ChangeNotifier {
   List<VoucherModel> _vouchers = [];
+  List<VoucherModel> voucherActive = [];
+
+  bool isActiveVoucher = false;
 
   List<VoucherModel> get vouchers => _vouchers;
 
@@ -19,5 +22,19 @@ class VoucherProvider with ChangeNotifier {
     } catch (e) {
       print(e);
     }
+    notifyListeners();
+  }
+
+  setVoucher(VoucherModel voucher) {
+    voucherActive.clear();
+    voucherActive.add(
+      VoucherModel(
+        id: vouchers.length,
+        kode: voucher.kode,
+        nominal: voucher.nominal,
+      ),
+    );
+    isActiveVoucher = true;
+    notifyListeners();
   }
 }

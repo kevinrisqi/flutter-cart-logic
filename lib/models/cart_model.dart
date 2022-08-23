@@ -28,6 +28,6 @@ class CartModel {
   }
 
   int getTotalPrice() {
-    return int.parse(menu!.harga.toString()) * quantity! ;
+    return int.parse(menu!.harga.toString()) * quantity!;
   }
 }

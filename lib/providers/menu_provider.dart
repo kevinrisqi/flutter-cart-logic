@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/models/voucher_model.dart';
 import 'package:flutter_interview_test/services/menu_service.dart';
 
 import '../models/menu_model.dart';
@@ -22,4 +23,5 @@ class MenuProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
 }

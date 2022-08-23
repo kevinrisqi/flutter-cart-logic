@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/pages/home_page.dart';
 import 'package:flutter_interview_test/pages/profile_page.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
+import 'package:flutter_interview_test/providers/voucher_provider.dart';
 import 'package:flutter_interview_test/theme.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +19,16 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     getInit();
+    getInit2();
     super.initState();
   }
 
   getInit() async {
     await Provider.of<MenuProvider>(context, listen: false).getMenus();
+  }
+
+  getInit2() async {
+    await Provider.of<VoucherProvider>(context, listen: false).getVouchers();
   }
 
   int currentIndex = 0;

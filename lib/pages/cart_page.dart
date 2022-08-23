@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/cart_model.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
+import 'package:flutter_interview_test/providers/voucher_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/menu_provider.dart';
@@ -24,6 +25,7 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
+    VoucherProvider voucherProvider = Provider.of<VoucherProvider>(context);
 
     Widget checkoutButton() {
       return Container(
@@ -81,43 +83,64 @@ class _CartPageState extends State<CartPage> {
             SizedBox(
               height: 20,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        'assets/icon_ticket.png',
-                        width: 22,
-                      ),
-                      SizedBox(
-                        width: 12,
-                      ),
-                      Text(
-                        'Voucher',
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 18,
-                          fontWeight: semiBold,
-                        ),
-                      )
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isInputVoucher = true;
-                      });
-                    },
-                    child: Row(
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  isInputVoucher = true;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
                       children: [
-                        Text(
-                          'Input Voucher',
-                          style: secondaryTextStyle.copyWith(
-                            fontWeight: medium,
-                          ),
+                        Image.asset(
+                          'assets/icon_ticket.png',
+                          width: 22,
                         ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          'Voucher',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 18,
+                            fontWeight: semiBold,
+                          ),
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        voucherProvider.isActiveVoucher
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    voucherProvider.voucherActive[0].kode
+                                        .toString(),
+                                    style: secondaryTextStyle.copyWith(
+                                      fontWeight: light,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Rp ${voucherProvider.voucherActive[0].nominal}',
+                                    style: secondaryTextStyle.copyWith(
+                                        fontSize: 13,
+                                        fontWeight: light,
+                                        color: Colors.red),
+                                  ),
+                                ],
+                              )
+                            : Text(
+                                'Input Voucher',
+                                style: secondaryTextStyle.copyWith(
+                                  fontWeight: medium,
+                                ),
+                              ),
                         SizedBox(
                           width: 7,
                         ),
@@ -126,9 +149,9 @@ class _CartPageState extends State<CartPage> {
                           color: secondaryColor.withOpacity(0.50),
                         ),
                       ],
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -252,7 +275,10 @@ class _CartPageState extends State<CartPage> {
                 controller: _voucher,
                 style: secondaryTextStyle.copyWith(fontSize: 13),
                 decoration: InputDecoration(
-                  hintStyle: secondaryTextStyle.copyWith(fontSize: 13),
+                  hintStyle: secondaryTextStyle.copyWith(
+                    fontSize: 13,
+                    color: secondaryColor.withOpacity(0.4),
+                  ),
                   hintText: 'puas',
                   suffixIcon: GestureDetector(
                     onTap: () {
@@ -276,7 +302,25 @@ class _CartPageState extends State<CartPage> {
                 bottom: 40,
               ),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  print(_voucher.text);
+                  List voucher = [];
+                  voucherProvider.vouchers.map((item) {
+                    voucher.add(item);
+                  }).toList();
+                  if (voucher.indexWhere(
+                          (element) => element.kode == _voucher.text) ==
+                      -1) {
+                    print(voucher);
+                    print('Maaf, kode voucher yg Anda masukkan salah!');
+                  } else {
+                    int index = voucher
+                        .indexWhere((element) => element.kode == _voucher.text);
+                    print('Kode ${voucher[index].kode}');
+                    voucherProvider.setVoucher(voucher[index]!);
+                    isInputVoucher = false;
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   primary: primaryColor,
                   shape: RoundedRectangleBorder(
