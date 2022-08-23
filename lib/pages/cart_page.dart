@@ -119,7 +119,7 @@ class _CartPageState extends State<CartPage> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    voucherProvider.voucherActive[0].kode
+                                    voucherProvider.voucherActive.length
                                         .toString(),
                                     style: secondaryTextStyle.copyWith(
                                       fontWeight: light,
@@ -283,6 +283,7 @@ class _CartPageState extends State<CartPage> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
+                        voucherProvider.isActiveVoucher = false;
                         isInputVoucher = false;
                       });
                     },
@@ -303,7 +304,6 @@ class _CartPageState extends State<CartPage> {
               ),
               child: ElevatedButton(
                 onPressed: () {
-                  print(_voucher.text);
                   List voucher = [];
                   voucherProvider.vouchers.map((item) {
                     voucher.add(item);
@@ -311,7 +311,17 @@ class _CartPageState extends State<CartPage> {
                   if (voucher.indexWhere(
                           (element) => element.kode == _voucher.text) ==
                       -1) {
-                    print(voucher);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: alertColor,
+                        content: Text(
+                          'Maaf, kode voucher yg Anda masukkan salah!',
+                          style: secondaryTextStyle.copyWith(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    );
                     print('Maaf, kode voucher yg Anda masukkan salah!');
                   } else {
                     int index = voucher
