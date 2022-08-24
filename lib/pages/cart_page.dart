@@ -129,9 +129,10 @@ class _CartPageState extends State<CartPage> {
                                   Text(
                                     'Rp ${voucherProvider.voucherActive.last.nominal}',
                                     style: secondaryTextStyle.copyWith(
-                                        fontSize: 13,
-                                        fontWeight: light,
-                                        color: Colors.red),
+                                      fontSize: 13,
+                                      fontWeight: light,
+                                      color: Colors.red,
+                                    ),
                                   ),
                                 ],
                               )
