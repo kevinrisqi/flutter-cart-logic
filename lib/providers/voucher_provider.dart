@@ -28,6 +28,7 @@ class VoucherProvider with ChangeNotifier {
   }
 
   setVoucher(VoucherModel voucher) {
+    voucherActive.removeWhere((element) => element.id != 0);
     voucherActive.add(
       VoucherModel(
         id: vouchers.length,
