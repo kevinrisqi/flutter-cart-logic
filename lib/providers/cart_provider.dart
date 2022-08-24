@@ -71,13 +71,11 @@ class CartProvider with ChangeNotifier {
     for (var item in _carts) {
       total += (item.quantity! * item.menu!.harga!);
     }
-    if (voucher.id == 2) {
+    if (voucher.id == 1 || voucher.id == 2) {
       if (total > voucher.nominal!.toInt()) {
         total = total - voucher.nominal!.toInt();
-      }
-    } else if (voucher.id == 1) {
-      if (total > voucher.nominal!.toInt()) {
-        total = total - voucher.nominal!.toInt();
+      } else {
+        total = 0;
       }
     }
     return total;
