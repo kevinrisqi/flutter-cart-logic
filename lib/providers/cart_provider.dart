@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/menu_model.dart';
-import 'package:flutter_interview_test/services/menu_service.dart';
-
 import '../models/cart_model.dart';
+import '../models/voucher_model.dart';
 
 class CartProvider with ChangeNotifier {
   List<CartModel> _carts = [];
@@ -40,7 +39,7 @@ class CartProvider with ChangeNotifier {
 
   minQuantity(int id) {
     _carts[id].quantity = _carts[id].quantity! - 1;
-    if (_carts[id].quantity! < 0 ) {
+    if (_carts[id].quantity! < 0) {
       return _carts[id].quantity = 0;
     }
     notifyListeners();
@@ -54,11 +53,30 @@ class CartProvider with ChangeNotifier {
     return total;
   }
 
-  totalPrice() {
+  subTotalPrice() {
     int total = 0;
     for (var item in _carts) {
       total += (item.quantity! * item.menu!.harga!);
     }
     return total;
   }
+
+  totalPrice(VoucherModel voucher) {
+    int total = 0;
+    for (var item in _carts) {
+      total += (item.quantity! * item.menu!.harga!);
+    }
+    if (voucher.id == 2) {
+      if (total > voucher.nominal!.toInt()) {
+        total = total - voucher.nominal!.toInt();
+      }
+    } else {
+      if (total > voucher.nominal!.toInt()) {
+        total = total - voucher.nominal!.toInt();
+      }
+    }
+
+    return total;
+  }
+
 }

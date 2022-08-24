@@ -68,7 +68,7 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   Text(
-                    'Rp ${cartProvider.totalPrice().toString()}',
+                    'Rp ${cartProvider.subTotalPrice().toString()}',
                     style: priceTextStyle.copyWith(
                       fontWeight: bold,
                     ),
@@ -189,7 +189,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                         Text(
-                          'Rp ${cartProvider.totalPrice()}',
+                          'Rp ${cartProvider.totalPrice(voucherProvider.voucherActive[0])}',
                           style: priceTextStyle.copyWith(
                             fontSize: 20,
                             fontWeight: bold,
@@ -283,7 +283,7 @@ class _CartPageState extends State<CartPage> {
                   suffixIcon: GestureDetector(
                     onTap: () {
                       setState(() {
-                        voucherProvider.isActiveVoucher = false;
+                        voucherProvider.resetVoucher();
                         isInputVoucher = false;
                       });
                     },

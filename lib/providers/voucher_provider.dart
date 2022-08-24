@@ -37,4 +37,10 @@ class VoucherProvider with ChangeNotifier {
     isActiveVoucher = true;
     notifyListeners();
   }
+
+  resetVoucher() {
+    isActiveVoucher = false;
+    voucherActive.clear();
+    notifyListeners();
+  }
 }
