@@ -9,6 +9,7 @@ import '../theme.dart';
 
 class CartCard extends StatefulWidget {
   CartModel? cart;
+
   CartCard({this.cart, Key? key}) : super(key: key);
 
   @override
@@ -16,6 +17,7 @@ class CartCard extends StatefulWidget {
 }
 
 class _CartCardState extends State<CartCard> {
+  final TextEditingController _catatan = TextEditingController();
   @override
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
@@ -69,9 +71,10 @@ class _CartCardState extends State<CartCard> {
                     ),
                   ),
                   SizedBox(
-                    height: 3,
+                    height: 6,
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(
                         'assets/icon_note.png',
@@ -80,13 +83,29 @@ class _CartCardState extends State<CartCard> {
                       SizedBox(
                         width: 7,
                       ),
-                      Text(
-                        'Tambahkan Catatan',
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 11,
-                          fontWeight: medium,
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        // color: Colors.red,
+                        child: TextFormField(
+                          onChanged: (value) {
+                            cartProvider.addNote(value, widget.cart!.id!);
+                            print('${widget.cart!.id}');
+                          },
+                          controller: _catatan,
+                          maxLines: 2,
+                          style: primaryTextStyle.copyWith(
+                              fontSize: 11,
+                              fontWeight: light,
+                              color: Colors.grey),
+                          decoration: InputDecoration.collapsed(
+                            hintText: 'Tambahkan Catatan',
+                            hintStyle: primaryTextStyle.copyWith(
+                              fontSize: 11,
+                              fontWeight: light,
+                            ),
+                          ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ],
@@ -118,7 +137,7 @@ class _CartCardState extends State<CartCard> {
                 width: 11,
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   cartProvider.minQuantity(widget.cart!.id!);
                 },
                 child: Image.asset(

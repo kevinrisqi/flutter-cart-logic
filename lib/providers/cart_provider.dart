@@ -32,6 +32,11 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  addNote(String note, int id) {
+    _carts[id].catatan = note;
+    notifyListeners();
+  }
+
   addQuantity(int id) {
     _carts[id].quantity = _carts[id].quantity! + 1;
     notifyListeners();
@@ -70,13 +75,11 @@ class CartProvider with ChangeNotifier {
       if (total > voucher.nominal!.toInt()) {
         total = total - voucher.nominal!.toInt();
       }
-    } else {
+    } else if (voucher.id == 1) {
       if (total > voucher.nominal!.toInt()) {
         total = total - voucher.nominal!.toInt();
       }
     }
-
     return total;
   }
-
 }

@@ -119,7 +119,7 @@ class _CartPageState extends State<CartPage> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    voucherProvider.voucherActive[0].kode
+                                    voucherProvider.voucherActive.last.kode
                                         .toString(),
                                     style: secondaryTextStyle.copyWith(
                                       fontWeight: light,
@@ -127,7 +127,7 @@ class _CartPageState extends State<CartPage> {
                                     ),
                                   ),
                                   Text(
-                                    'Rp ${voucherProvider.voucherActive[0].nominal}',
+                                    'Rp ${voucherProvider.voucherActive.last.nominal}',
                                     style: secondaryTextStyle.copyWith(
                                         fontSize: 13,
                                         fontWeight: light,
@@ -189,7 +189,7 @@ class _CartPageState extends State<CartPage> {
                           ),
                         ),
                         Text(
-                          'Rp ${cartProvider.totalPrice(voucherProvider.voucherActive[0])}',
+                          'Rp ${cartProvider.totalPrice(voucherProvider.voucherActive.last)}',
                           style: priceTextStyle.copyWith(
                             fontSize: 20,
                             fontWeight: bold,
