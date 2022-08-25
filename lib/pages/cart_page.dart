@@ -42,9 +42,8 @@ class _CartPageState extends State<CartPage> {
     }
 
     handlersCheckout() {
-      for (var i = 0; i < cartProvider.carts.length; i++) {
-        print(cartProvider.carts[0].catatan);
-      }
+      List nama = cartProvider.carts.map((cart) => cart.menu!.nama).toList();
+      print(nama);
     }
 
     Widget checkoutButton() {
@@ -221,7 +220,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      handlersCheckout();
+                      handleCheckout();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,

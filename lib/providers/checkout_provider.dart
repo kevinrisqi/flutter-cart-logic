@@ -14,7 +14,7 @@ class CheckoutProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<bool> checkout(int? idVoucher, int nominalDiskon, int nominalPesanan,
+  Future<bool> checkout(int idVoucher, int nominalDiskon, int nominalPesanan,
       List<CartModel> carts) async {
     try {
       if (await CheckoutService()

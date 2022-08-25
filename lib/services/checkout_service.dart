@@ -7,9 +7,9 @@ import '../models/cart_model.dart';
 class CheckoutService {
   String baseUrl = 'https://tes-mobile.landa.id/api';
 
-  Future<bool> checkout(int? idVoucher, int nominalDiskon, int nominalPesanan,
+  Future<bool> checkout(int idVoucher, int nominalDiskon, int nominalPesanan,
       List<CartModel> carts) async {
-    var url = '$baseUrl/orders';
+    var url = '$baseUrl/order';
     var headers = {
       'Content-Type': 'application/json',
     };
@@ -18,13 +18,16 @@ class CheckoutService {
       'voucher_id': idVoucher,
       'nominal_diskon': nominalDiskon,
       'nominal_pesanan': nominalPesanan,
-      'items': carts.map((cart) => {
-            'id': cart.menu!.id,
-            'harga': cart.menu!.harga,
-            'catatan': cart.catatan,
-          })
+      'items': carts
+          .map((cart) => {
+                'id': cart.menu!.id,
+                'harga': cart.menu!.harga,
+                'catatan': cart.catatan,
+              })
+          .toList()
     });
 
+    print(body);
     var response =
         await http.post(Uri.parse(url), headers: headers, body: body);
 
