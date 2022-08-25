@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_interview_test/pages/checkout_page.dart';
 import 'package:flutter_interview_test/pages/main_page.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
           '/': (context) => MainPage(),
           '/cart': (context) => CartPage(),
           '/menu': (context) => MenuPage(),
+          '/checkout': (context) => CheckoutPage(),
         },
       ),
     );

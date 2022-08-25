@@ -10,7 +10,7 @@ class CartModel {
     this.id,
     this.menu,
     this.quantity,
-    this.catatan,
+    this.catatan = '-',
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json) {

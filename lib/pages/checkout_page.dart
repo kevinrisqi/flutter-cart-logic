@@ -5,20 +5,21 @@ import 'package:flutter_interview_test/models/cart_model.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/checkout_provider.dart';
 import 'package:flutter_interview_test/providers/voucher_provider.dart';
+import 'package:flutter_interview_test/widgets/checkout_card.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/menu_provider.dart';
 import '../theme.dart';
 import '../widgets/cart_card.dart';
 
-class CartPage extends StatefulWidget {
-  CartPage({Key? key}) : super(key: key);
+class CheckoutPage extends StatefulWidget {
+  CheckoutPage({Key? key}) : super(key: key);
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<CheckoutPage> createState() => _CheckoutPageState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _CheckoutPageState extends State<CheckoutPage> {
   final TextEditingController _voucher = TextEditingController();
 
   bool isInputVoucher = false;
@@ -29,18 +30,15 @@ class _CartPageState extends State<CartPage> {
     VoucherProvider voucherProvider = Provider.of<VoucherProvider>(context);
     CheckoutProvider checkoutProvider = Provider.of<CheckoutProvider>(context);
 
-    handleCheckout() async {
-      int? idVoucher = voucherProvider.voucherActive.last.id;
-      int? diskon = voucherProvider.voucherActive.last.nominal;
-      int totalPrice =
-          cartProvider.totalPrice(voucherProvider.voucherActive.last);
-      List<CartModel> carts = cartProvider.carts;
-      
-      await checkoutProvider.checkout(idVoucher, diskon!, totalPrice, carts);
-
-      Navigator.pushNamed(context, '/checkout');
-      print(checkoutProvider.checkouts.last.cart!.quantity);
-    }
+    // handleCheckout() async {
+    //   int? idVoucher = voucherProvider.voucherActive.last.id;
+    //   int? diskon = voucherProvider.voucherActive.last.nominal;
+    //   int totalPrice =
+    //       cartProvider.totalPrice(voucherProvider.voucherActive.last);
+    //   List<CartModel> carts = cartProvider.carts;
+    //   await checkoutProvider.checkout(idVoucher, diskon!, totalPrice, carts);
+    //   print(checkoutProvider.checkouts.last.cart!.quantity);
+    // }
 
     Widget checkoutButton() {
       return Container(
@@ -216,7 +214,7 @@ class _CartPageState extends State<CartPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      handleCheckout();
+                      // handleCheckout();
                     },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
@@ -226,9 +224,9 @@ class _CartPageState extends State<CartPage> {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 4, vertical: 11),
+                          horizontal: 25, vertical: 11),
                       child: Text(
-                        'Pesan Sekarang',
+                        'Batalkan',
                         style: actionTextStyle.copyWith(
                           fontSize: 16,
                           fontWeight: semiBold,
@@ -399,7 +397,7 @@ class _CartPageState extends State<CartPage> {
       backgroundColor: bgColor1,
       appBar: AppBar(
         title: Text(
-          'Keranjang',
+          'Checkout',
           style: primaryTextStyle.copyWith(
             fontSize: 16,
             fontWeight: semiBold,
@@ -413,8 +411,10 @@ class _CartPageState extends State<CartPage> {
           Padding(
             padding: const EdgeInsets.only(top: 31),
             child: Column(
-              children: cartProvider.carts
-                  .map((cart) => CartCard(cart: cart))
+              children: checkoutProvider.checkouts
+                  .map((checkout) => CheckoutCard(
+                        cart: checkout.cart,
+                      ))
                   .toList(),
             ),
           )
