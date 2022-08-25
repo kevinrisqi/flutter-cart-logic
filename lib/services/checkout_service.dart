@@ -37,19 +37,17 @@ class CheckoutService {
     if (response.statusCode == 200) {
       int idTransaction = json.decode(response.body)['id'];
       List<CheckoutModel> transactions = [];
-      List<CartModel> tempCarts = [];
 
-      for (var element in carts) {
-        tempCarts.add(CartModel.fromJson(element));
+      for (var i = 0; i < carts.length; i++) {
+        transactions.add(CheckoutModel(
+          id: idTransaction,
+          idVoucher: idVoucher,
+          nominalDiskon: nominalDiskon,
+          nominalPesanan: nominalPesanan,
+          cart: carts[i],
+        ));
       }
 
-      transactions.add(CheckoutModel(
-        id: idTransaction,
-        idVoucher: idVoucher,
-        nominalDiskon: nominalDiskon,
-        nominalPesanan: nominalPesanan,
-        cart: tempCarts,
-      ));
       return transactions;
     } else {
       throw Exception('Gagal melakukan checkout!');

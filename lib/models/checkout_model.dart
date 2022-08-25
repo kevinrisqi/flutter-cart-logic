@@ -1,7 +1,7 @@
 import 'package:flutter_interview_test/models/cart_model.dart';
 
 class CheckoutModel {
-  late int? id;
+  int? id;
   int? idVoucher;
   int? nominalDiskon;
   int? nominalPesanan;
