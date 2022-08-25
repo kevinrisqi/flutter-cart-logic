@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/cart_model.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
+import 'package:flutter_interview_test/providers/checkout_provider.dart';
 import 'package:flutter_interview_test/providers/voucher_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,25 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     CartProvider cartProvider = Provider.of<CartProvider>(context);
     VoucherProvider voucherProvider = Provider.of<VoucherProvider>(context);
+    CheckoutProvider checkoutProvider = Provider.of<CheckoutProvider>(context);
+
+    handleCheckout() async {
+      int? idVoucher = voucherProvider.voucherActive.last.id;
+      int? diskon = voucherProvider.voucherActive.last.nominal;
+      int totalPrice =
+          cartProvider.totalPrice(voucherProvider.voucherActive.last);
+      List<CartModel> carts = cartProvider.carts;
+      if (await checkoutProvider.checkout(
+          idVoucher, diskon!, totalPrice, carts)) {
+        print('success');
+      }
+    }
+
+    handlersCheckout() {
+      for (var i = 0; i < cartProvider.carts.length; i++) {
+        print(cartProvider.carts[0].catatan);
+      }
+    }
 
     Widget checkoutButton() {
       return Container(
@@ -200,7 +220,9 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      handlersCheckout();
+                    },
                     style: ElevatedButton.styleFrom(
                       primary: primaryColor,
                       shape: RoundedRectangleBorder(

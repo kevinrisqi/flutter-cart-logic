@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import 'pages/cart_page.dart';
 import 'pages/menu_page.dart';
+import 'providers/checkout_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,6 +35,9 @@ class _MyAppState extends State<MyApp> {
         ),
         ChangeNotifierProvider(
           create: (context) => VoucherProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CheckoutProvider(),
         ),
       ],
       child: MaterialApp(

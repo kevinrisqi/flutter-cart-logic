@@ -13,9 +13,21 @@ class CheckoutModel {
     this.cart,
   });
 
-  factory CheckoutModel.fromJson(Map<String, dynamic> json){
+  factory CheckoutModel.fromJson(Map<String, dynamic> json) {
     return CheckoutModel(
-      idVoucher: json['id_voucher']
+      idVoucher: json['id_voucher'],
+      nominalDiskon: json['nominal_diskon'],
+      nominalPesanan: json['nominal_pesanan'],
+      cart: CartModel.fromJson(json['cart']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id_voucher': idVoucher,
+      'nominal_diskon': nominalDiskon,
+      'nominal_pesanan':nominalPesanan,
+      'items': cart!.toJson(),
+    };
   }
 }
