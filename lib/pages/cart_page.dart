@@ -35,16 +35,13 @@ class _CartPageState extends State<CartPage> {
       int totalPrice =
           cartProvider.totalPrice(voucherProvider.voucherActive.last);
       List<CartModel> carts = cartProvider.carts;
-      if (await checkoutProvider.checkout(
-          idVoucher, diskon!, totalPrice, carts)) {
-        print('success');
-      }
+      await checkoutProvider.checkout(idVoucher, diskon!, totalPrice, carts);
     }
 
-    handlersCheckout() {
-      List nama = cartProvider.carts.map((cart) => cart.menu!.nama).toList();
-      print(nama);
-    }
+    // handlersCheckout() {
+    //   List nama = cartProvider.carts.map((cart) => cart.menu!.nama).toList();
+    //   print(nama);
+    // }
 
     Widget checkoutButton() {
       return Container(

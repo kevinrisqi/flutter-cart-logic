@@ -5,7 +5,7 @@ import 'package:flutter_interview_test/services/voucher_service.dart';
 class VoucherProvider with ChangeNotifier {
   List<VoucherModel> _vouchers = [];
   List<VoucherModel> voucherActive = [
-    VoucherModel(id: 0, kode: '', nominal: 1)
+    VoucherModel(id: 0, kode: '', nominal: 0)
   ];
 
   bool isActiveVoucher = false;

@@ -14,18 +14,13 @@ class CheckoutProvider with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<bool> checkout(int idVoucher, int nominalDiskon, int nominalPesanan,
+  Future<void> checkout(int? idVoucher, int nominalDiskon, int nominalPesanan,
       List<CartModel> carts) async {
     try {
-      if (await CheckoutService()
-          .checkout(idVoucher, nominalDiskon, nominalPesanan, carts)) {
-        return true;
-      } else {
-        return false;
-      }
+      await CheckoutService()
+          .checkout(idVoucher, nominalDiskon, nominalPesanan, carts);
     } catch (e) {
       print(e);
-      return false;
     }
   }
 }
