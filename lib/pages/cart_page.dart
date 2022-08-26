@@ -398,15 +398,29 @@ class _CartPageState extends State<CartPage> {
     return Scaffold(
       backgroundColor: bgColor1,
       appBar: AppBar(
-        title: Text(
-          'Keranjang',
-          style: primaryTextStyle.copyWith(
-            fontSize: 16,
-            fontWeight: semiBold,
-            color: Colors.white,
-          ),
+        title: Row(
+          children: [
+            GestureDetector(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(Icons.chevron_left),
+            ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+            ),
+            Text(
+              'Keranjang',
+              style: primaryTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+                color: Colors.white,
+              ),
+            ),
+          ],
         ),
         backgroundColor: blueColor,
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: [

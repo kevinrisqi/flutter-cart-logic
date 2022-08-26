@@ -102,7 +102,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         onPressed: () {
                           int? id = checkoutProvider.checkouts.last.id;
                           checkoutProvider.cancelCheckout(id!);
-                          Navigator.pushReplacementNamed(context, '/cart');
+                          Navigator.popUntil(context, ModalRoute.withName('/cart'));
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
