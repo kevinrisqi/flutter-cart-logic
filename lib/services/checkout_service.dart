@@ -53,4 +53,19 @@ class CheckoutService {
       throw Exception('Gagal melakukan checkout!');
     }
   }
+
+  Future cancelCheckout(int id) async {
+    var url = '$baseUrl/order/cancel/$id';
+    var headers = {'Content-Type': 'application/json'};
+
+    var response = await http.post(Uri.parse(url), headers: headers);
+    print(response.body);
+    
+    if (response.statusCode == 200) {
+      var result = json.encode(response.body);
+      return result;
+    } else {
+      throw Exception('Gagal melakukan pembatalan order !');
+    }
+  }
 }

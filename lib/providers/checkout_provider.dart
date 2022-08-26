@@ -24,4 +24,14 @@ class CheckoutProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  Future cancelCheckout(int id) async {
+    try {
+      var result = await CheckoutService().cancelCheckout(id);
+      return result;
+    } catch (e) {
+      print(e);
+    }
+    notifyListeners();
+  }
 }

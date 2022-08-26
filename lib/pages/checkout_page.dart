@@ -30,15 +30,115 @@ class _CheckoutPageState extends State<CheckoutPage> {
     VoucherProvider voucherProvider = Provider.of<VoucherProvider>(context);
     CheckoutProvider checkoutProvider = Provider.of<CheckoutProvider>(context);
 
-    // handleCheckout() async {
-    //   int? idVoucher = voucherProvider.voucherActive.last.id;
-    //   int? diskon = voucherProvider.voucherActive.last.nominal;
-    //   int totalPrice =
-    //       cartProvider.totalPrice(voucherProvider.voucherActive.last);
-    //   List<CartModel> carts = cartProvider.carts;
-    //   await checkoutProvider.checkout(idVoucher, diskon!, totalPrice, carts);
-    //   print(checkoutProvider.checkouts.last.cart!.quantity);
-    // }
+    Future<void> showCancelDialog() async {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) => Container(
+          width: MediaQuery.of(context).size.width - 2 * 30,
+          // constraints: ,
+          child: AlertDialog(
+            backgroundColor: bgColor2,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            content: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.warning_amber,
+                        size: 50,
+                        color: primaryColor,
+                      ),
+                      SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Apakah Anda yakin ingin membatalkan pesanan ini ?',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          primary: bgColor2,
+                          elevation: 0,
+                          side: BorderSide(
+                            color: primaryColor,
+                          ),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.22,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 8,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Batal',
+                              style: priceTextStyle.copyWith(
+                                fontWeight: bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          int? id = checkoutProvider.checkouts.last.id;
+                          checkoutProvider.cancelCheckout(id!);
+                          Navigator.pushNamed(context, '/cart');
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          primary: primaryColor,
+                          elevation: 0,
+                          side: BorderSide(
+                            color: primaryColor,
+                          ),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.22,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 8,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Yakin',
+                              style: priceTextStyle.copyWith(
+                                fontWeight: bold,
+                                color: bgColor1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
 
     Widget checkoutButton() {
       return Container(
@@ -214,17 +314,19 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // handleCheckout();
+                      showCancelDialog();
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: primaryColor,
+                      primary: alertColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
                       ),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 25, vertical: 11),
+                        horizontal: 25,
+                        vertical: 11,
+                      ),
                       child: Text(
                         'Batalkan',
                         style: actionTextStyle.copyWith(
