@@ -102,7 +102,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                         onPressed: () {
                           int? id = checkoutProvider.checkouts.last.id;
                           checkoutProvider.cancelCheckout(id!);
-                          Navigator.pushNamed(context, '/cart');
+                          Navigator.pushReplacementNamed(context, '/cart');
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -507,6 +507,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
         ),
         backgroundColor: blueColor,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: ListView(
         children: [
