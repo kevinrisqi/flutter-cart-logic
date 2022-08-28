@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/pages/home_page.dart';
-import 'package:flutter_interview_test/pages/profile_page.dart';
+import 'package:flutter_interview_test/pages/history_page.dart';
 import 'package:flutter_interview_test/providers/menu_provider.dart';
 import 'package:flutter_interview_test/providers/voucher_provider.dart';
 import 'package:flutter_interview_test/theme.dart';
@@ -58,6 +58,7 @@ class _MainPageState extends State<MainPage> {
                 ),
                 child: Image.asset(
                   'assets/icon_home.png',
+                  color: currentIndex == 0 ? primaryColor : Colors.grey,
                   width: 21,
                 ),
               ),
@@ -69,10 +70,9 @@ class _MainPageState extends State<MainPage> {
                   top: 15,
                   left: 30,
                 ),
-                child: Image.asset(
-                  'assets/icon_profile.png',
-                  width: 21,
-                ),
+                child: Icon(Icons.receipt_long,
+                color: currentIndex != 0 ? primaryColor : Colors.grey,
+                )
               ),
               label: '',
             ),
@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> {
         case 0:
           return HomePage();
         case 1:
-          return ProfilePage();
+          return HistoryPage();
         default:
           return HomePage();
       }
