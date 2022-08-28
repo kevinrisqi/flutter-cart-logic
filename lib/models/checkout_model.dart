@@ -6,6 +6,7 @@ class CheckoutModel {
   int? nominalDiskon;
   int? nominalPesanan;
   CartModel? cart;
+  String? status;
 
   CheckoutModel({
     this.id,
@@ -13,6 +14,7 @@ class CheckoutModel {
     this.nominalDiskon,
     this.nominalPesanan,
     this.cart,
+    this.status,
   });
 
   factory CheckoutModel.fromJson(Map<String, dynamic> json) {
@@ -22,6 +24,7 @@ class CheckoutModel {
       nominalDiskon: json['nominal_diskon'],
       nominalPesanan: json['nominal_pesanan'],
       cart: CartModel.fromJson(json['cart']),
+      status: json['status'],
     );
   }
 
@@ -32,6 +35,7 @@ class CheckoutModel {
       'nominal_diskon': nominalDiskon,
       'nominal_pesanan': nominalPesanan,
       'items': cart!.toJson(),
+      'status': status,
     };
   }
 }

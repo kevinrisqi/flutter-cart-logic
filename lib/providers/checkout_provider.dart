@@ -15,10 +15,10 @@ class CheckoutProvider with ChangeNotifier {
   }
 
   Future<void> checkout(int? idVoucher, int nominalDiskon, int nominalPesanan,
-      List<CartModel> carts) async {
+      List<CartModel> carts, status) async {
     try {
       List<CheckoutModel> checkout = await CheckoutService()
-          .checkout(idVoucher, nominalDiskon, nominalPesanan, carts);
+          .checkout(idVoucher, nominalDiskon, nominalPesanan, carts, status);
       _checkouts = checkout;
     } catch (e) {
       print(e);

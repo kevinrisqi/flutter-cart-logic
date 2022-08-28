@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_interview_test/models/checkout_model.dart';
+import 'package:flutter_interview_test/models/menu_model.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/cart_model.dart';
@@ -9,7 +10,7 @@ class CheckoutService {
   String baseUrl = 'https://tes-mobile.landa.id/api';
 
   Future<List<CheckoutModel>> checkout(int? idVoucher, int nominalDiskon,
-      int nominalPesanan, List<CartModel> carts) async {
+      int nominalPesanan, List<CartModel> carts, status) async {
     var url = '$baseUrl/order';
     var headers = {
       'Content-Type': 'application/json',
@@ -44,9 +45,26 @@ class CheckoutService {
           idVoucher: idVoucher,
           nominalDiskon: nominalDiskon,
           nominalPesanan: nominalPesanan,
-          cart: carts[i],
+          cart: carts[0],
+          status: status,
         ));
       }
+
+      // transactions.add(CheckoutModel(
+      //   id: idTransaction,
+      //   idVoucher: idVoucher,
+      //   nominalDiskon: nominalDiskon,
+      //   nominalPesanan: nominalPesanan,
+      //   cart: carts
+      //       .map((e) => CartModel(
+      //             catatan: e.catatan,
+      //             id: e.id,
+      //             menu: e.menu,
+      //             quantity: e.quantity,
+      //           ))
+      //       .toList(),
+      //   status: status,
+      // ));
 
       return transactions;
     } else {
@@ -60,7 +78,7 @@ class CheckoutService {
 
     var response = await http.post(Uri.parse(url), headers: headers);
     print(response.body);
-    
+
     if (response.statusCode == 200) {
       var result = json.encode(response.body);
       return result;

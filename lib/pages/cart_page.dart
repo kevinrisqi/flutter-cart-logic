@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_test/models/cart_model.dart';
+import 'package:flutter_interview_test/models/checkout_model.dart';
 import 'package:flutter_interview_test/providers/cart_provider.dart';
 import 'package:flutter_interview_test/providers/checkout_provider.dart';
 import 'package:flutter_interview_test/providers/voucher_provider.dart';
@@ -35,11 +36,18 @@ class _CartPageState extends State<CartPage> {
       int totalPrice =
           cartProvider.totalPrice(voucherProvider.voucherActive.last);
       List<CartModel> carts = cartProvider.carts;
-      
-      await checkoutProvider.checkout(idVoucher, diskon!, totalPrice, carts);
+      String status = 'Berhasil';
+
+      await checkoutProvider.checkout(
+        idVoucher,
+        diskon!,
+        totalPrice,
+        carts,
+        status,
+      );
 
       Navigator.pushNamed(context, '/checkout');
-      print(checkoutProvider.checkouts.last.cart!.quantity);
+      print(checkoutProvider.checkouts.length);
     }
 
     Widget checkoutButton() {
@@ -401,13 +409,13 @@ class _CartPageState extends State<CartPage> {
         title: Row(
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Icon(Icons.chevron_left),
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.3,
+              width: 12,
             ),
             Text(
               'Keranjang',
